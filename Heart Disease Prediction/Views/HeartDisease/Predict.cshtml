@@ -1,0 +1,132 @@
+﻿@model Heart_Disease_Prediction.ML_Model.DataStructures.HeartData
+
+@{
+    ViewData["Title"] = "Heart Disease Prediction";
+}
+
+<h1>Heart Disease Prediction in ASP.NET Core using ML.NET</h1>
+<hr />
+<div class="row">
+    <form asp-action="Predict" class="col-md-8">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Age" class="control-label"></label>
+                        <input asp-for="Age" class="form-control" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Sex" class="control-label"></label>
+                        <select asp-for="Sex" class="form-control">
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                        <span asp-validation-for="Sex" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Cp" class="control-label"></label>
+                    <select asp-for="Cp" class="form-control" >
+                        <option value="1">typical angina</option>
+                        <option value="2">atypical angina</option>
+                        <option value="3">non-anginal pain</option>
+                        <option value="4">asymptomatic</option>
+                    </select>
+                    <span asp-validation-for="Cp" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TrestBps" class="control-label"></label>
+                    <input asp-for="TrestBps" class="form-control" />
+                    <span asp-validation-for="TrestBps" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Chol" class="control-label"></label>
+                    <input asp-for="Chol" class="form-control" />
+                    <span asp-validation-for="Chol" class="text-danger"></span>
+                </div>
+                
+
+            </div>
+            <div class="col-md-4">
+                
+                <div class="form-group">
+                    <label asp-for="Fbs" class="control-label"></label>
+                    <input asp-for="Fbs" class="form-control" />
+                    <span asp-validation-for="Fbs" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RestEcg" class="control-label"></label>
+                    <select asp-for="RestEcg" class="form-control" >
+                        <option value="0">normal</option>
+                        <option value="1">having ST-T wave abnormality</option>
+                        <option value="2">showing probable or definite left ventricular hypertrophy by Estes' criteria</option>
+                    </select>
+                    <span asp-validation-for="RestEcg" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Thalac" class="control-label"></label>
+                    <select asp-for="Thalac" class="form-control" >
+                        <option value="3">normal</option>
+                        <option value="6">fixed defect</option>
+                        <option value="7">reversible defect</option>
+                    </select>
+                    <span asp-validation-for="Thalac" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Exang" class="control-label"></label>
+                    <select asp-for="Exang" class="form-control" >
+                        <option value="1">yes</option>
+                        <option value="0">no</option>
+                    </select>
+                    <span asp-validation-for="Exang" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                
+                <div class="form-group">
+                    <label asp-for="OldPeak" class="control-label"></label>
+                    <input asp-for="OldPeak" class="form-control" />
+                    <span asp-validation-for="OldPeak" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Slope" class="control-label"></label>
+                    <select asp-for="Slope" class="form-control" >
+                        <option value="1">upsloping</option>
+                        <option value="2">flat</option>
+                        <option value="3">downsloping</option>
+                    </select>
+                    <span asp-validation-for="Slope" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ca" class="control-label"></label>
+                    <input asp-for="Ca" class="form-control" />
+                    <span asp-validation-for="Ca" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Thal" class="control-label"></label>
+                    <input asp-for="Thal" class="form-control" />
+                    <span asp-validation-for="Thal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Predict" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+    @if (ViewBag.HeartPrediction != null)
+    {
+        <div class="col-md-4">
+            <h4>Prediction: @ViewBag.HeartPrediction.Prediction</h4>
+            <h4>Probability: @ViewBag.HeartPrediction.Probability</h4>
+            <h4>Score: @ViewBag.HeartPrediction.Score</h4>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
